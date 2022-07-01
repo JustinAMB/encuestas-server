@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Post } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/interfaces/user.interface';
 import { Repository } from 'typeorm';
@@ -23,6 +23,10 @@ export class UsersService {
         uOld.email=u.email;
         uOld.password=u.password;
         return await this.usersRepository.save(uOld);
+    }
+    
+    async create(u:User): Promise<User> {
+        return await this.usersRepository.save(u);
     }
 
 
