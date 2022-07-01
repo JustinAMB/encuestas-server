@@ -17,6 +17,13 @@ export class UsersService {
     async findById(id:number): Promise<User> {
         return await this.usersRepository.findOneById(id);
     }
+    async updateById(u:User,id:number): Promise<User> {
+        const uOld=await this.findById(id);
+        uOld.username=u.username;
+        uOld.email=u.email;
+        uOld.password=u.password;
+        return await this.usersRepository.save(uOld);
+    }
 
 
     
