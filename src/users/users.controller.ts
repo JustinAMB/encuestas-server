@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { User } from 'src/interfaces/user.interface';
 import { UsersService } from './users.service';
 
@@ -8,5 +8,13 @@ export class UsersController {
     @Get()
     async findAll(): Promise<User[]> {
         return await this.usersService.findAll();
+    }
+    @Get(':id')
+    async findById(@Param() params): Promise<User> {
+        return await this.usersService.findById(params.id);
+    }
+    @Put(':id')
+    async updateById(@Body() updateUser: User,@Param() params): Promise<User> {
+        return await this.usersService.updateById(updateUser,params.id);
     }
 }
